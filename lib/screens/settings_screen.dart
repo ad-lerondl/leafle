@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../providers/app_state.dart';
 import '../theme/colors.dart';
 
@@ -67,6 +68,25 @@ class SettingsScreen extends StatelessWidget {
               Text(
                 'Cette heure s’applique aux routines, aux dépendances et à la note de journée. Elle utilise l’heure locale de votre appareil.',
                 style: TextStyle(color: Colors.grey[700], fontSize: 13),
+              ),
+              const SizedBox(height: 28),
+              const Text(
+                'Informations',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: kForestPrimary),
+              ),
+              const SizedBox(height: 8),
+              Card(
+                child: ListTile(
+                  leading: const Icon(Icons.privacy_tip_outlined),
+                  title: const Text('Déclaration de confidentialité'),
+                  trailing: const Icon(Icons.open_in_new, size: 20),
+                  onTap: () async {
+                    final uri = Uri.parse('https://alapps-leafle.netlify.app/privacy/');
+                    if (await canLaunchUrl(uri)) {
+                      await launchUrl(uri, mode: LaunchMode.externalApplication);
+                    }
+                  },
+                ),
               ),
             ],
           );
