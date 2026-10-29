@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_state.dart';
+import '../models/leafle.dart';
+import '../models/forest.dart';
 import 'routines_screen.dart';
 import 'forest_screen.dart';
 import 'anti_routines_screen.dart';
@@ -169,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     );
   }
 
-  Widget _buildLeafleCard(leafle) {
+  Widget _buildLeafleCard(Leafle leafle) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -275,7 +277,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   // Remplacé par fonction utilitaire energyColor dans colors.dart
 
-  Widget _buildForestStats(forest) {
+  Widget _buildForestStats(Forest forest) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(

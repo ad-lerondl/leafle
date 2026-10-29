@@ -18,7 +18,7 @@ class NotificationService {
       android: AndroidInitializationSettings('@mipmap/ic_launcher'),
       iOS: DarwinInitializationSettings(),
     );
-    await _plugin.initialize(settings);
+    await _plugin.initialize(settings: settings);
     await _plugin
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.requestNotificationsPermission();
@@ -37,11 +37,11 @@ class NotificationService {
     }
 
     await _plugin.zonedSchedule(
-      _dailyReminderId,
-      'Leafle',
-      'Une nouvelle journée commence. Prêt à prendre soin de vous ?',
-      scheduled,
-      const NotificationDetails(
+      id: _dailyReminderId,
+      title: 'Leafle',
+      body: 'Une nouvelle journée commence. Prêt à prendre soin de vous ?',
+      scheduledDate: scheduled,
+      notificationDetails: const NotificationDetails(
         android: AndroidNotificationDetails(
           'daily_reminders',
           'Rappels quotidiens',
@@ -52,12 +52,11 @@ class NotificationService {
         iOS: DarwinNotificationDetails(),
       ),
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
     );
   }
 
   Future<void> cancelDailyReminder() async {
-    await _plugin.cancel(_dailyReminderId);
+    await _plugin.cancel(id: _dailyReminderId);
   }
 }
